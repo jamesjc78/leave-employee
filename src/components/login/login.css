@@ -1,0 +1,36 @@
+.my-container {
+  position: absolute;
+  top: 100px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin: 20px;
+}
+
+.main-btn {
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: #4e8bc6;
+  border-radius: 20px;
+  border-color: #4e8bc6;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.logo {
+  margin: 30px;
+  height: 50px;
+}
+
+::placeholder {
+  color: #7aa8d5 !important;
+}
+.form-control {
+  background-color: #edf3f8;
+}
+
+small {
+  font-size: 12px;
+}
