@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import LoginForm from "./components/login/login";
+import Home from "./components/home/home";
+import NavBar from "./components/navbar";
+import Account from "./components/account/account";
 import "./App.css";
 
 function App() {
@@ -48,7 +51,7 @@ function App() {
     event.preventDefault();
     if (loginValid(loginError, email, password)) {
       setAuthorized(true);
-      // navigate("/user");
+      navigate("/home");
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
@@ -107,6 +110,24 @@ function App() {
             onLoginChange={handleLoginChange}
             loginError={loginError}
           />
+        }
+      />
+      <Route
+        path="/home"
+        element={
+          <div>
+            <NavBar />
+            <Home />
+          </div>
+        }
+      />
+      <Route
+        path="/account"
+        element={
+          <div>
+            <NavBar />
+            <Account />
+          </div>
         }
       />
     </Routes>
