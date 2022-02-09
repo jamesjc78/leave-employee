@@ -37,13 +37,13 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto ">
             <Nav.Link className="navbar-custom text-primary">
-              {username}
+              <b>{username}</b>
             </Nav.Link>
             <Nav.Link
               className="navbar-custom text-primary"
               onClick={clickLogout}
             >
-              Logout
+              <b>Logout</b>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
