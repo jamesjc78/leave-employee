@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./components/login/login.css";
-import "./components/navbar.css";
+import "./components/navbar/navbar.css";
 
 ReactDOM.render(
   <React.StrictMode>

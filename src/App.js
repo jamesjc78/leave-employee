@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import LoginForm from "./components/login/login";
 import Home from "./components/home/home";
-import NavBar from "./components/navbar";
+import NavBar from "./components/navbar/navbar";
 import Account from "./components/account/account";
 import "./App.css";
 
