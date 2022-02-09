@@ -1,5 +1,28 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getUser } from "../../endpoints/user";
 function NavBar() {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("Username");
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      getUser().then((body) => {
+        console.log("res ", body);
+        if (body.authmessage) {
+          localStorage.removeItem("accessToken");
+          navigate("/");
+        }
+        setUsername(body.user.firstName + " " + body.user.lastName);
+      });
+    } else {
+      navigate("/");
+    }
+  }, []);
+  const clickLogout = () => {
+    localStorage.removeItem("accessToken");
+    navigate("/");
+  };
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -13,10 +36,13 @@ function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto ">
-            <Nav.Link className="navbar-custom" href="#home">
-              Username
+            <Nav.Link className="navbar-custom text-primary">
+              {username}
             </Nav.Link>
-            <Nav.Link className="navbar-custom" href="#link">
+            <Nav.Link
+              className="navbar-custom text-primary"
+              onClick={clickLogout}
+            >
               Logout
             </Nav.Link>
           </Nav>

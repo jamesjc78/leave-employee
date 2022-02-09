@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// GET ~/user/:username
+// GET ~/employee/user
 export const getUser = async (username) => {
-  const response = await axios.get(`/user/${username}`, {
+  const response = await axios.get(`/employee/user`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
