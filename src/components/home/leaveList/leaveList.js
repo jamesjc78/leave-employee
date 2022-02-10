@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { Button } from "react-bootstrap";
-function LeaveList() {
+import React from "react";
+import { arrayMonth } from "../../../common/common";
+function LeaveList({ leaves }) {
+  let counter = 1;
   return (
     <div className="container-fluid">
       <div className="row justify-content-center">
@@ -15,20 +16,20 @@ function LeaveList() {
               </tr>
             </thead>
             <tbody>
-              {/* {employees.map((employee) => (
-                <tr
-                  key={employee.username}
-                  id={employee.username}
-                  onClick={() =>
-                    HandleUserRowClick(employee.username, navigate)
-                  }
-                >
+              {leaves.map((leave) => (
+                <tr key={counter}>
                   <th scope="row">{counter++}</th>
-                  <td>{employee.username}</td>
-                  <td>{employee.firstName + " " + employee.lastName}</td>
-                  <td>{employee.position}</td>
+                  <td>
+                    {arrayMonth[new Date(leave?.date).getMonth()] +
+                      " " +
+                      new Date(leave?.date).getDate() +
+                      ", " +
+                      new Date(leave?.date).getFullYear()}
+                  </td>
+                  <td>{leave.type}</td>
+                  <td>{leave.notes}</td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </table>
         </div>
