@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // GET ~/employee/leave
-export const getLeave = async (username) => {
+export const getLeave = async () => {
   const response = await axios.get(`/employee/leave`, {
     headers: {
       "Content-Type": "application/json",
