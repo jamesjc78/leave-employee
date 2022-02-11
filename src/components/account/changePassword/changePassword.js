@@ -5,8 +5,7 @@ function ChangePassword({
   modalShowUpdate,
   setModalShowUpdate,
   setPassError,
-  oldPassword,
-  newPassword,
+  passError,
 }) {
   return (
     <div>
@@ -15,13 +14,13 @@ function ChangePassword({
         aria-labelledby="contained-modal-title-vcenter"
         backdrop="static"
         centered
-        // onHide={() => {
-        //   setModalShowUpdate(false);
-        //   setPassError({
-        //     oldPassError: "",
-        //     newPassError: "",
-        //   });
-        // }}
+        onHide={() => {
+          setModalShowUpdate(false);
+          setPassError({
+            oldPassError: "",
+            newPassError: "",
+          });
+        }}
       >
         <form
           //   onSubmit={(event) =>
@@ -37,7 +36,7 @@ function ChangePassword({
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Add User
+              Change Password
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -110,7 +109,7 @@ function ChangePassword({
           </Modal.Body>
           <Modal.Footer>
             <Button type="submit" className="btn btn-primary">
-              ChangePassword
+              Change Password
             </Button>
           </Modal.Footer>
         </form>

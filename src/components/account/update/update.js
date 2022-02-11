@@ -1,5 +1,32 @@
-import React, { Component } from "react";
-function Update() {
+import React, { Component, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getUser } from "../../../endpoints/user";
+function Update({ setModalShowUpdate, setPassError }) {
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [position, setPosition] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      getUser().then((body) => {
+        console.log("res ", body);
+        const { firstName, lastName, position } = body.user;
+        if (body.authmessage) {
+          console.log("has authmessage");
+          localStorage.removeItem("accessToken");
+          navigate("/");
+        }
+        setFirstName(firstName);
+        setLastName(lastName);
+        setPosition(position);
+      });
+    } else {
+      console.log("no token");
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div className="container-fluid">
       <div className="row justify-content-center ">
@@ -29,7 +56,9 @@ function Update() {
                 type="text"
                 id="firstName"
                 name="firstName"
+                value={firstName}
                 className="form-control border-0"
+                placeholder="First Name"
                 noValidate
                 // onBlur={(event) =>
                 //   HandleAddChange(
@@ -66,7 +95,9 @@ function Update() {
                 type="text"
                 id="lastName"
                 name="lastName"
+                value={lastName}
                 className="form-control border-0"
+                placeholder="Last Name"
                 noValidate
                 // onBlur={(event) =>
                 //   HandleAddChange(
@@ -103,7 +134,9 @@ function Update() {
                 type="text"
                 id="position"
                 name="position"
+                value={position}
                 className="form-control border-0"
+                placeholder="Position"
                 noValidate
                 // onBlur={(event) =>
                 //   HandleAddChange(
@@ -139,8 +172,17 @@ function Update() {
         </div>
       </div>
       <div className="row justify-content-center ">
-        <div className="col-16 col-sm-8 col-md-4  text-primary">
-          Change Password
+        <div
+          className="col-16 col-sm-8 col-md-4"
+          onClick={() => {
+            setModalShowUpdate(true);
+            setPassError({
+              oldPassError: "",
+              newPassError: "",
+            });
+          }}
+        >
+          <button className="click-link text-primary">Change Password</button>
         </div>
       </div>
     </div>
