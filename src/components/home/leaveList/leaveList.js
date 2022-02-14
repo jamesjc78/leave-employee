@@ -1,5 +1,5 @@
 import React from "react";
-import { arrayMonth } from "../../../common/common";
+import { arrayMonth } from "../../../common";
 function LeaveList({ leaves }) {
   let counter = 1;
   return (
