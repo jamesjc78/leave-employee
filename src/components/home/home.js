@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import LeaveForm from "./leaveForm/leaveForm";
-import LeaveList from "./leaveList/leaveList";
+import LeaveForm from "./leaveForm";
+import LeaveList from "./leaveList";
 import { getLeave } from "../../endpoints/leave";
-import { mySort } from "../../common/common";
+import _ from "lodash";
 import { useNavigate } from "react-router-dom";
-function Home() {
+const Home = () => {
   const [leaveType, setLeaveType] = useState(null);
   const [note, setNote] = useState(null);
   const [noteError, setNoteError] = useState("");
@@ -24,7 +24,7 @@ function Home() {
         navigate("/");
       }
       if (body.status === "success") {
-        mySort(body.employeeLeaves, "username");
+        body.employeeLeaves = _.orderBy(body.employeeLeaves, "date", "desc");
         setLeaves(body.employeeLeaves);
       }
     });
@@ -47,6 +47,6 @@ function Home() {
       <LeaveList leaves={leaves} />
     </div>
   );
-}
+};
 
 export default Home;
