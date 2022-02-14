@@ -1,10 +1,17 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../../endpoints/user";
+import { HandleUpdateChange, HandleUpdateUser } from "./update.handler";
 function Update({ setModalShowUpdate, setPassError }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [position, setPosition] = useState("");
+  const [updateError, setUpdateError] = useState({
+    // update user error messages
+    firstNameError: "",
+    lastNameError: "",
+    positionError: "",
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,59 +40,49 @@ function Update({ setModalShowUpdate, setPassError }) {
         <div className="col-16 col-sm-8 col-md-4 ">
           <form
             className="add-form shadow bg-white"
-            // onSubmit={(event) =>
-            //   HandleAddLeave(
-            //     event,
-            //     leaveType,
-            //     note,
-            //     typeError,
-            //     setTypeError,
-            //     noteError,
-            //     setNoteError,
-            //     refreshList,
-            //     setRefreshList
-            //   )
-            // }
+            onSubmit={(event) =>
+              HandleUpdateUser(event, firstName, lastName, position)
+            }
             noValidate
           >
             <div className="mb-3">
-              <label htmlFor="firstName" className="form-label">
+              <label htmlFor="firstname" className="form-label">
                 First Name
               </label>
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
-                value={firstName}
+                id="firstname"
+                name="firstname"
+                defaultValue={firstName}
                 className="form-control border-0"
                 placeholder="First Name"
                 noValidate
-                // onBlur={(event) =>
-                //   HandleAddChange(
-                //     event,
-                //     setLeaveType,
-                //     setNote,
-                //     typeError,
-                //     setTypeError,
-                //     noteError,
-                //     setNoteError
-                //   )
-                // }
-                // onChange={(event) =>
-                //   HandleAddChange(
-                //     event,
-                //     setLeaveType,
-                //     setNote,
-                //     typeError,
-                //     setTypeError,
-                //     noteError,
-                //     setNoteError
-                //   )
-                // }
+                onBlur={(event) =>
+                  HandleUpdateChange(
+                    event,
+                    updateError,
+                    setFirstName,
+                    setLastName,
+                    setPosition,
+                    setUpdateError
+                  )
+                }
+                onChange={(event) =>
+                  HandleUpdateChange(
+                    event,
+                    updateError,
+                    setFirstName,
+                    setLastName,
+                    setPosition,
+                    setUpdateError
+                  )
+                }
               ></input>
-              {/* {noteError.length > 0 && (
-                <small className="text-danger">{noteError}</small>
-              )} */}
+              {updateError.firstNameError.length > 0 && (
+                <small className="text-danger">
+                  {updateError.firstNameError}
+                </small>
+              )}
             </div>
             <div className="mb-3">
               <label htmlFor="lastName" className="form-label">
@@ -93,38 +90,38 @@ function Update({ setModalShowUpdate, setPassError }) {
               </label>
               <input
                 type="text"
-                id="lastName"
-                name="lastName"
-                value={lastName}
+                id="lastname"
+                name="lastname"
+                defaultValue={lastName}
                 className="form-control border-0"
                 placeholder="Last Name"
                 noValidate
-                // onBlur={(event) =>
-                //   HandleAddChange(
-                //     event,
-                //     setLeaveType,
-                //     setNote,
-                //     typeError,
-                //     setTypeError,
-                //     noteError,
-                //     setNoteError
-                //   )
-                // }
-                // onChange={(event) =>
-                //   HandleAddChange(
-                //     event,
-                //     setLeaveType,
-                //     setNote,
-                //     typeError,
-                //     setTypeError,
-                //     noteError,
-                //     setNoteError
-                //   )
-                // }
+                onBlur={(event) =>
+                  HandleUpdateChange(
+                    event,
+                    updateError,
+                    setFirstName,
+                    setLastName,
+                    setPosition,
+                    setUpdateError
+                  )
+                }
+                onChange={(event) =>
+                  HandleUpdateChange(
+                    event,
+                    updateError,
+                    setFirstName,
+                    setLastName,
+                    setPosition,
+                    setUpdateError
+                  )
+                }
               ></input>
-              {/* {noteError.length > 0 && (
-                <small className="text-danger">{noteError}</small>
-              )} */}
+              {updateError.lastNameError.length > 0 && (
+                <small className="text-danger">
+                  {updateError.lastNameError}
+                </small>
+              )}
             </div>
             <div className="mb-3">
               <label htmlFor="position" className="form-label">
@@ -134,36 +131,36 @@ function Update({ setModalShowUpdate, setPassError }) {
                 type="text"
                 id="position"
                 name="position"
-                value={position}
+                defaultValue={position}
                 className="form-control border-0"
                 placeholder="Position"
                 noValidate
-                // onBlur={(event) =>
-                //   HandleAddChange(
-                //     event,
-                //     setLeaveType,
-                //     setNote,
-                //     typeError,
-                //     setTypeError,
-                //     noteError,
-                //     setNoteError
-                //   )
-                // }
-                // onChange={(event) =>
-                //   HandleAddChange(
-                //     event,
-                //     setLeaveType,
-                //     setNote,
-                //     typeError,
-                //     setTypeError,
-                //     noteError,
-                //     setNoteError
-                //   )
-                // }
+                onBlur={(event) =>
+                  HandleUpdateChange(
+                    event,
+                    updateError,
+                    setFirstName,
+                    setLastName,
+                    setPosition,
+                    setUpdateError
+                  )
+                }
+                onChange={(event) =>
+                  HandleUpdateChange(
+                    event,
+                    updateError,
+                    setFirstName,
+                    setLastName,
+                    setPosition,
+                    setUpdateError
+                  )
+                }
               ></input>
-              {/* {noteError.length > 0 && (
-                <small className="text-danger">{noteError}</small>
-              )} */}
+              {updateError.positionError.length > 0 && (
+                <small className="text-danger">
+                  {updateError.positionError}
+                </small>
+              )}
             </div>
             <button type="submit" className="btn btn-primary add-btn col-12">
               Update
