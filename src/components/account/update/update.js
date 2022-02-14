@@ -2,9 +2,9 @@ import React, { Component, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../../endpoints/user";
 function Update({ setModalShowUpdate, setPassError }) {
-  const [firstName, setFirstName] = useState(null);
-  const [lastName, setLastName] = useState(null);
-  const [position, setPosition] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [position, setPosition] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
-import Update from "./update/update";
-import ChangePassword from "./changePassword/changePassword";
-function Account() {
+import Update from "./update";
+import ChangePassword from "./changePassword";
+const Account = () => {
   const [modalShowUpdate, setModalShowUpdate] = useState(false);
   const [passError, setPassError] = useState({
     oldPassError: "",
@@ -21,6 +21,6 @@ function Account() {
       />
     </div>
   );
-}
+};
 
 export default Account;
