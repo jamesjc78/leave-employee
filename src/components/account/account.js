@@ -2,22 +2,13 @@ import React, { Component, useState } from "react";
 import Update from "./update";
 import ChangePassword from "./changePassword";
 const Account = () => {
-  const [modalShowUpdate, setModalShowUpdate] = useState(false);
-  const [passError, setPassError] = useState({
-    oldPassError: "",
-    newPassError: "",
-  });
+  const [modalShowPass, setModalShowPass] = useState(false);
   return (
     <div>
-      <Update
-        setModalShowUpdate={setModalShowUpdate}
-        setPassError={setPassError}
-      />
+      <Update setModalShowPass={setModalShowPass} />
       <ChangePassword
-        modalShowUpdate={modalShowUpdate}
-        setModalShowUpdate={setModalShowUpdate}
-        setPassError={setPassError}
-        passError={passError}
+        modalShowPass={modalShowPass}
+        setModalShowPass={setModalShowPass}
       />
     </div>
   );

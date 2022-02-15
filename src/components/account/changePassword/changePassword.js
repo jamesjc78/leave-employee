@@ -1,21 +1,26 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { HandleChangePassword } from "./changePassword.handler";
-function ChangePassword({
-  modalShowUpdate,
-  setModalShowUpdate,
-  setPassError,
-  passError,
-}) {
+import {
+  HandleChangePassword,
+  HandleChangePasswordChange,
+} from "./changePassword.handler";
+function ChangePassword({ modalShowPass, setModalShowPass }) {
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [passError, setPassError] = useState({
+    // update password error messages
+    oldPassError: "",
+    newPassError: "",
+  });
   return (
     <div>
       <Modal
-        show={modalShowUpdate}
+        show={modalShowPass}
         aria-labelledby="contained-modal-title-vcenter"
         backdrop="static"
         centered
         onHide={() => {
-          setModalShowUpdate(false);
+          setModalShowPass(false);
           setPassError({
             oldPassError: "",
             newPassError: "",
@@ -23,15 +28,18 @@ function ChangePassword({
         }}
       >
         <form
-          //   onSubmit={(event) =>
-          //     HandleChangePassword(
-          //       event,
-          //       passwordError,
-          //       oldPassword,
-          //       newPassword,
-          //       setModalShowUpdate
-          //     )
-          //   }
+          onSubmit={(event) =>
+            HandleChangePassword(
+              event,
+              newPassword,
+              oldPassword,
+              passError,
+              setNewPassword,
+              setOldPassword,
+              setPassError,
+              setModalShowPass
+            )
+          }
           noValidate
         >
           <Modal.Header closeButton>
@@ -43,68 +51,66 @@ function ChangePassword({
             <div className="form-group">
               <label htmlFor="oldPassword">Old Password</label>
               <input
-                type="text"
+                type="password"
                 className="form-control border-0"
                 id="oldPassword"
                 name="oldPassword"
                 placeholder="Old Password"
                 noValidate
-                // onBlur={(event) =>
-                //   HandleChangePasswordChange(
-                //     event,
-                //     passwordError,
-                //     setOldPassword,
-                //     setNewPassword,
-                //     setPassError
-                //   )
-                // }
-                // onChange={(event) =>
-                //   HandleChangePasswordChange(
-                //     event,
-                //     passwordError,
-                //     setOldPassword,
-                //     setNewPassword,
-                //     setPassError
-                //   )
-                // }
+                onBlur={(event) =>
+                  HandleChangePasswordChange(
+                    event,
+                    passError,
+                    setOldPassword,
+                    setNewPassword,
+                    setPassError
+                  )
+                }
+                onChange={(event) =>
+                  HandleChangePasswordChange(
+                    event,
+                    passError,
+                    setOldPassword,
+                    setNewPassword,
+                    setPassError
+                  )
+                }
               ></input>
-              {/* {passwordError.userError.length > 0 && (
-                <small className="text-danger">{passwordError.userError}</small>
-              )} */}
+              {passError.oldPassError.length > 0 && (
+                <small className="text-danger">{passError.oldPassError}</small>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="newPassword">New Password</label>
               <input
-                type="text"
+                type="password"
                 className="form-control border-0"
                 id="newPassword"
                 name="newPassword"
                 placeholder="New Password"
                 noValidate
-                // onBlur={(event) =>
-                //   HandleChangePasswordChange(
-                //     event,
-                //     passwordError,
-                //     setOldPassword,
-                //     setNewPassword,
-                //     setPassError
-                //   )
-                // }
-                // onChange={(event) =>
-                //   HandleChangePasswordChange(
-                //     event,
-                //     passwordError,
-                //     setOldPassword,
-                //     setNewPassword,
-                //     setPassError
-                //   )
-                // }
+                onBlur={(event) =>
+                  HandleChangePasswordChange(
+                    event,
+                    passError,
+                    setOldPassword,
+                    setNewPassword,
+                    setPassError
+                  )
+                }
+                onChange={(event) =>
+                  HandleChangePasswordChange(
+                    event,
+                    passError,
+                    setOldPassword,
+                    setNewPassword,
+                    setPassError
+                  )
+                }
               ></input>
-              {/* {passwordError.firstNameError.length > 0 && (
-                <small className="text-danger">
-                  {passwordError.firstNameError}
-                </small>
-              )} */}
+              {passError.newPassError.length > 0 && (
+                <small className="text-danger">{passError.newPassError}</small>
+              )}
             </div>
           </Modal.Body>
           <Modal.Footer>

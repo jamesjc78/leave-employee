@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../../endpoints/user";
 import { HandleUpdateChange, HandleUpdateUser } from "./update.handler";
-function Update({ setModalShowUpdate, setPassError }) {
+const Update = ({ setModalShowPass }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [position, setPosition] = useState("");
@@ -17,10 +17,8 @@ function Update({ setModalShowUpdate, setPassError }) {
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
       getUser().then((body) => {
-        console.log("res ", body);
         const { firstName, lastName, position } = body.user;
         if (body.authmessage) {
-          console.log("has authmessage");
           localStorage.removeItem("accessToken");
           navigate("/");
         }
@@ -29,7 +27,6 @@ function Update({ setModalShowUpdate, setPassError }) {
         setPosition(position);
       });
     } else {
-      console.log("no token");
       navigate("/");
     }
   }, []);
@@ -172,11 +169,7 @@ function Update({ setModalShowUpdate, setPassError }) {
         <div
           className="col-16 col-sm-8 col-md-4"
           onClick={() => {
-            setModalShowUpdate(true);
-            setPassError({
-              oldPassError: "",
-              newPassError: "",
-            });
+            setModalShowPass(true);
           }}
         >
           <button className="click-link text-primary">Change Password</button>
@@ -184,6 +177,6 @@ function Update({ setModalShowUpdate, setPassError }) {
       </div>
     </div>
   );
-}
+};
 
 export default Update;

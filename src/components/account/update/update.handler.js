@@ -8,10 +8,12 @@ export const HandleUpdateUser = (event, firstName, lastName, position) => {
   toast.configure();
   if (firstName && lastName && position) {
     updateUser(firstName, lastName, position).then((body) => {
-      if (body.status == "failed");
-      toast.error(body.message);
-      toast.success("Successfully updated!");
-      localStorage.setItem("accessToken", body.accessToken);
+      if (body.status == "failed") {
+        toast.error(body.message);
+      } else {
+        toast.success("Successfully updated!");
+        localStorage.setItem("accessToken", body.accessToken);
+      }
     });
   }
 };
