@@ -17,3 +17,7 @@ code {
   background: none;
   border: none;
 }
+
+.navbar-brand {
+  cursor: pointer;
+}
